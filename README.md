@@ -31,7 +31,7 @@ The project features a fully automated, modern data flow:
 
 ## 📊 Dataset & Features
 Data is ingested directly from the automated pipeline, guaranteeing consistency.
-* **Volume:** Spans 220 countries. The ML model utilizes data from approx. 2000–2024, resulting in ~20,000 complete training records.
+* **Volume:** Spans 220 countries. The ML model utilizes data from approx. 2000–2025, resulting in ~20,000 complete training records.
 * **Target Variable:** *EIU Democracy Index*.
 * **9 Selected Indicators:**
   * 💵 **Economic:** Gross Domestic Product (GDP).
