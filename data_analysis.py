@@ -4,7 +4,6 @@ from functools import reduce
 
 #DATA
 #1. press_free
-#skala 0-1
 fp_id = pd.read_csv('data/world_press_freedom_Index.csv')
 fp_id.drop(['STRUCTURE', 'STRUCTURE_ID', 'ACTION', 'FREQ', 'REF_AREA', 'INDICATOR', 'SEX', 'AGE', 'URBANISATION', 'UNIT_MEASURE', 'COMP_BREAKDOWN_1', 'COMP_BREAKDOWN_2', 'COMP_BREAKDOWN_3', 'UNIT_TYPE', 'DATABASE_ID', 'TIME_FORMAT', 'UNIT_MULT', 'DATA_SOURCE', 'OBS_CONF', 'OBS_STATUS', 'FREQ_LABEL', 'INDICATOR_LABEL', 'SEX_LABEL', 'AGE_LABEL', 'URBANISATION_LABEL', 'UNIT_MEASURE_LABEL', 'COMP_BREAKDOWN_1_LABEL', 'COMP_BREAKDOWN_2_LABEL', 'COMP_BREAKDOWN_3_LABEL', 'UNIT_TYPE_LABEL', 'DATABASE_ID_LABEL', 'TIME_FORMAT_LABEL', 'UNIT_MULT_LABEL', 'OBS_STATUS_LABEL', 'OBS_CONF_LABEL'], axis=1, inplace=True, errors='ignore')
 
@@ -220,7 +219,6 @@ import io
 
 BASE_URL = "http://127.0.0.1:8000"
 
-
 api_columns = [
     'year',
     'press_free',
@@ -238,29 +236,24 @@ for country_name, country_data in indicators_csv.groupby('Country'):
     if not country_name or str(country_name) == 'nan':
         continue
 
-    # 1. Tworzymy kraj w bazie (POST /countries)
     try:
-        # Ignorujemy błędy, jeśli kraj już istnieje (status != 200)
+
         requests.post(f"{BASE_URL}/countries", json={"name": country_name})
     except Exception:
-        pass  # Jeśli API nie działa, wyjdzie błąd niżej
+        pass
 
-    # 2. Przygotowujemy dane (tylko wybrane kolumny)
     subset = country_data.copy()
 
-    # Uzupełniamy brakujące kolumny pustymi wartościami (żeby CSV miał dobrą strukturę)
     for col in api_columns:
         if col not in subset.columns:
             subset[col] = ""
 
     final_data = subset[api_columns]
 
-    # Zamiana DataFrame na wirtualny plik CSV
     csv_buffer = io.StringIO()
     final_data.to_csv(csv_buffer, index=False)
     csv_content = csv_buffer.getvalue()
 
-    # 3. Wysyłamy plik do API (POST /upload-csv)
     files = {'file': (f"{country_name}_data.csv", csv_content, "text/csv")}
 
     try:
@@ -274,8 +267,3 @@ for country_name, country_data in indicators_csv.groupby('Country'):
     except Exception as e:
         print(f"❌ {country_name}: Błąd połączenia: {e}")
 
-
-#pomoce
-# print(free_id.shape)
-# print(free_id.columns.tolist())
-# print(columns.tolist())
