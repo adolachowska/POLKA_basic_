@@ -215,6 +215,8 @@ full = indicators_csv
 
 print(indicators_csv.columns.tolist())
 
+
+
 """
 #3. TO API
 import requests #wysyłanie zapytań do api
