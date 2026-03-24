@@ -59,6 +59,7 @@ Data is ingested directly from the automated pipeline, guaranteeing consistency.
 | 🛠️ `setup.py` | Creating local server (Azurite). |
 | ⚙️ `config.py` | Configuration file containing XGBoost hyperparameters, feature lists, and thresholds. |
 | 🧠 `model_pipeline.py` | Main Machine Learning script (XGBoost training, prediction, and evaluation). |
+| 🐋 `dcoker.py` | Preparing |
 
 ## 🚀 How to run the project locally?
 
