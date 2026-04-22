@@ -47,7 +47,7 @@ services:
     depends_on:
       - azurite
     environment:
-      - DATABASE_URL=mssql+pyodbc://sa:Polka123!@host.docker.internal:1433/polka_db?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=yes
+      - - DATABASE_URL=mssql+pyodbc://sa:Polka123!@host.docker.internal:1433/polka_db?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=yes
 
 volumes:
   azurite_data:
