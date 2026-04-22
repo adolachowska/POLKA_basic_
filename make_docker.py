@@ -1,5 +1,5 @@
 # make_docker.py
-
+'''
 dockerignore_content = """__pycache__
 *.pyc
 .venv
@@ -47,7 +47,7 @@ services:
     depends_on:
       - azurite
     environment:
-      - - DATABASE_URL=mssql+pyodbc://sa:Polka123!@host.docker.internal:1433/polka_db?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=yes
+      - - DATABASE_URL=mssql+pyodbc://sa:xxx@host.docker.internal:1433/polka_db?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=yes
 
 volumes:
   azurite_data:
@@ -68,3 +68,5 @@ print("✅ Pliki .dockerignore, Dockerfile i docker-compose.yml zostały utworzo
 import os
 print("Docker installing")
 os.system("docker-compose up --build")
+
+'''
